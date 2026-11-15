@@ -1,1 +1,36 @@
-# SpeedBench\n\nWall-clock timing of compression operations (SVD, quantize, Fourier, hybrid) by matrix size.\n\n## What it does\n\nTimes four compression operations on random square matrices of several\nsizes using time.perf_counter with best-of-N repeats, and returns one\nrow per (size, method) with the measured seconds.\n\n    from speedbench import speed_table\n\n    for row in speed_table(sizes=(64, 128, 256), repeats=3):\n        print(row["size"], row["method"], row["seconds"])\n\n## API\n\n- time_operation(func, repeats) - best-of-N wall-clock seconds\n- speed_table(sizes, repeats, seed) - one row per size and method\n\n## Honest results and limitations\n\n- Timings are wall-clock on the machine running the benchmark and vary\n  with BLAS backend, CPU load and numpy build. Nothing here is a\n  portable speedup claim; compare only rows within one run.\n- Best-of-N damps scheduler noise but biases optimistic; medians would be\n  more conservative.\n- Matrices are random: timings reflect shapes, not structure.\n\n## Status\n\nPart of the kapildhinwa2010-dev toolkit experiments. CI and CodeQL run on\nevery push to main. License: MIT.\n
+# SpeedBench
+
+[![CI](https://github.com/kapildhinwa2010-dev/SpeedBench/actions/workflows/ci.yml/badge.svg)](https://github.com/kapildhinwa2010-dev/SpeedBench/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/kapildhinwa2010-dev/SpeedBench/actions/workflows/codeql.yml/badge.svg)](https://github.com/kapildhinwa2010-dev/SpeedBench/actions/workflows/codeql.yml)
+
+Wall-clock timing of compression operations (SVD, quantize, Fourier, hybrid) by matrix size.
+
+## What it does
+
+Times four compression operations on random square matrices of several
+sizes using time.perf_counter with best-of-N repeats, and returns one
+row per (size, method) with the measured seconds.
+
+    from speedbench import speed_table
+
+    for row in speed_table(sizes=(64, 128, 256), repeats=3):
+        print(row["size"], row["method"], row["seconds"])
+
+## API
+
+- time_operation(func, repeats) - best-of-N wall-clock seconds
+- speed_table(sizes, repeats, seed) - one row per size and method
+
+## Honest results and limitations
+
+- Timings are wall-clock on the machine running the benchmark and vary
+  with BLAS backend, CPU load and numpy build. Nothing here is a
+  portable speedup claim; compare only rows within one run.
+- Best-of-N damps scheduler noise but biases optimistic; medians would be
+  more conservative.
+- Matrices are random: timings reflect shapes, not structure.
+
+## Status
+
+Part of the kapildhinwa2010-dev toolkit experiments. CI and CodeQL run on
+every push to main. License: MIT.
