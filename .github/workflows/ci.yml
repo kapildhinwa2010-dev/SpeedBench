@@ -46,4 +46,4 @@ jobs:
       - name: Compile and smoke-test package
         run: |
           python -m compileall -q speedbench.py tests
-          python -c "import speedbench; print('ok')"
+          python -c "from speedbench import SpeedBench; print(type(SpeedBench()).__name__)"
